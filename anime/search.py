@@ -9,12 +9,17 @@ client = httpx.Client(base_url=constants.BASE)
 
 
 def search_anime():
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 2:
+        query = sys.argv[1]
+        episode_numer = sys.argv[2]
+    elif len(sys.argv) > 1:
         query = sys.argv[1]
     else:
         query = input("=> ")
     data = lxml.html.fromstring(
-        client.post(SEARCH_URL, headers=constants.HEADERS, data={"qfast": query}).json()["result"]
+        client.post(
+            SEARCH_URL, headers=constants.HEADERS, data={"qfast": query}
+        ).json()["result"]
     )
     dict = {}
     for results in data.cssselect("a[title]"):

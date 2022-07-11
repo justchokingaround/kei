@@ -12,6 +12,7 @@ M3U8_MATCHER = regex.compile(r".+?#(.+?)#")
 client = httpx.Client(base_url=constants.BASE)
 headers = {"user-agent": "mozilla/5.0"}
 
+
 def get_episodes_list(url):
     data = json.loads(
         lxml.html.fromstring(client.get(url, headers=constants.HEADERS).content)
@@ -22,6 +23,7 @@ def get_episodes_list(url):
     for value in range(int(data.get("eptotal"))):
         dict.update({value + 1: (data[str(value)])})
     return dict
+
 
 def scrape_embed(url):
     html = client.get(url, headers=constants.HEADERS).text

@@ -4,9 +4,11 @@ from anime import constants
 
 fzf = FzfPrompt()
 
+
 def prompt_user_for_input(dict):
     title = fzf.prompt(dict, '--prompt="Select an anime " --height=10')
     return title, constants.BASE + dict.get(title[0])
+
 
 def select_episode(dict):
     # if len(dict) == 1:
